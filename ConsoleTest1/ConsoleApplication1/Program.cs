@@ -12,7 +12,7 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            WebServer ws = new WebServer(SendResponse, "http://*:10500/test/");
+            WebServer ws = new WebServer(SendResponse, "http://*:80/");
             ws.Run();
             Console.WriteLine("A simple webserver. Press a key to quit.");
             Console.ReadKey();
