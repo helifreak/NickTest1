@@ -37,7 +37,7 @@ namespace SimpleWebServer
  
         public WebServer(string[] prefixes, Func<HttpListenerRequest, string> method)
         {
-            if (!HttpListener.IsSupported)
+            if (!HttpListener.IsSupported) 
                 throw new NotSupportedException(
                     "Needs Windows XP SP2, Server 2003 or later.");
  
@@ -82,25 +82,10 @@ namespace SimpleWebServer
                             try
                             {
                                 Console.WriteLine("Incoming Request");
-                                if (ctx.Request.HttpMethod == "GET")
-                                {
-                                    Console.WriteLine(" - GET");
-                                    string rstr = _responderMethod(ctx.Request);
-                                    byte[] buf = Encoding.UTF8.GetBytes(rstr);
-                                    ctx.Response.ContentLength64 = buf.Length;
-                                    ctx.Response.OutputStream.Write(buf, 0, buf.Length);
-                                }
-                                else if (ctx.Request.HttpMethod == "POST")
-                                {
-                                    Console.WriteLine(" - POST");
-                                    byte[]  buf = new byte[1024 * 1024];
-                                    ctx.Request.InputStream.Read(buf, 0, 1024 * 1024);
-                                    ctx.Request.InputStream.Close();
-                                    // buf[1024] = 0;
-                                    var str = System.Text.Encoding.Default.GetString(buf);
-                                    System.IO.File.WriteAllText(@"C:\Users\nicholas\Desktop\dump.txt",str);
-                                    // Console.WriteLine(str);
-                                }
+                                string rstr = _responderMethod(ctx.Request);
+                                byte[] buf = Encoding.UTF8.GetBytes(rstr);
+                                ctx.Response.ContentLength64 = buf.Length;
+                                ctx.Response.OutputStream.Write(buf, 0, buf.Length);
                             }
                             catch { } // suppress any exceptions 
                             finally

@@ -21,7 +21,30 @@ namespace ConsoleApplication1
 
         public static string SendResponse(HttpListenerRequest request)
         {
+            if (request.HttpMethod == "GET")
+            {
+                Console.WriteLine(" - GET");
+            }
+            else if (request.HttpMethod == "POST")
+            {
+                Console.WriteLine(" - POST");
+                ProcessPost(request);
+            }
+
             return string.Format("<HTML><BODY>My web page.<br>{0}</BODY></HTML>", DateTime.Now);
+        }
+
+        public static void ProcessPost(HttpListenerRequest request)
+        {
+            Console.WriteLine(request.ContentType);
+            if (request.ContentType == @"application\json") {
+
+            }
+            byte[] buf = new byte[1024 * 1024];
+            request.InputStream.Read(buf, 0, 1024 * 1024);
+            request.InputStream.Close();
+            var str = System.Text.Encoding.Default.GetString(buf);
+            System.IO.File.WriteAllText(@"C:\Users\nicholas\Desktop\dump.txt", str);
         }
     }
 }
