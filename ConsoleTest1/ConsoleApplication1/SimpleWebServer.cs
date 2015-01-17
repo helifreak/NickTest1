@@ -101,7 +101,7 @@ namespace SimpleWebServer
                                     // Console.WriteLine(str);
                                 }
                             }
-                            catch { } // suppress any exceptions
+                            catch { } // suppress any exceptions 
                             finally
                             {
                                 // always close the stream
