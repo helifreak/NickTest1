@@ -77,11 +77,15 @@ namespace ConsoleApplication1
         public static void ParseJSON(string str)
         {
             Newtonsoft.Json.Linq.JObject jObject = Newtonsoft.Json.Linq.JObject.Parse(str);
-            int maxprint = 10;
+            int maxprint = 5;
             foreach (var item in jObject)
             {
                 Console.WriteLine(item.ToString());
-                if (maxprint-- <= 0) break;
+                if (maxprint-- <= 0)
+                {
+                    Console.WriteLine("Etc ...");
+                    break;
+                }
             }
             string name = (string) jObject["ref"];
             Console.WriteLine("ref: " + name);
