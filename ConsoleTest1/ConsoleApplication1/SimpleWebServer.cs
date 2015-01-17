@@ -98,6 +98,7 @@ namespace SimpleWebServer
                                     ctx.Request.InputStream.Close();
                                     // buf[1024] = 0;
                                     var str = System.Text.Encoding.Default.GetString(buf);
+                                    System.IO.File.WriteAllText(@"C:\Users\nicholas\Desktop\dump.txt",str);
                                     // Console.WriteLine(str);
                                 }
                             }
