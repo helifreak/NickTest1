@@ -13,9 +13,9 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            // string str = System.IO.File.ReadAllText(@"C:\Users\nicholas\Desktop\dump.txt");
-            // ParseJSON(str);
-            // return;
+            string str = System.IO.File.ReadAllText(@"C:\Users\nicholas\Desktop\dump.txt");
+            ParseJSON(str);
+            return;
 
             WebServer ws = new WebServer(SendResponse, "http://*:80/");
             ws.Run();
