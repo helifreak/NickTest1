@@ -36,12 +36,33 @@ namespace ConsoleApplication1
 
         public static void ProcessPost(HttpListenerRequest request)
         {
-            Console.WriteLine(request.ContentType);
-            if (request.ContentType == @"application\json") {
+            Console.WriteLine(" - Content: " + request.ContentType);
+            Console.WriteLine(" - Length: " + request.ContentLength64);
+            Console.WriteLine(" - Remote: " + request.RemoteEndPoint);
+            Console.WriteLine(" - Service: " + request.ServiceName);
+            Console.WriteLine(" - Host: " + request.UserHostAddress);
+            Console.WriteLine(" - Headers: " + request.Headers.Count);
+            System.Collections.Specialized.NameValueCollection coll;
+            coll = request.Headers;
+            String[] arr1 = coll.AllKeys;
+
+            for (int loop1 = 0; loop1 < arr1.Length; loop1++)
+            {
+                Console.WriteLine("  - Key: " + arr1[loop1]);
+                // Get all values under this key.
+                String[] arr2 = coll.GetValues(arr1[loop1]);
+                for (int loop2 = 0; loop2 < arr2.Length; loop2++)
+                {
+                    Console.WriteLine("  - Value " + loop2 + ": " + arr2[loop2]);
+                }
+            }
+
+            if (request.ContentType == @"application/json")
+            {
 
             }
-            byte[] buf = new byte[1024 * 1024];
-            request.InputStream.Read(buf, 0, 1024 * 1024);
+            byte[] buf = new byte[request.ContentLength64];
+            request.InputStream.Read(buf, 0, (int) request.ContentLength64);
             request.InputStream.Close();
             var str = System.Text.Encoding.Default.GetString(buf);
             System.IO.File.WriteAllText(@"C:\Users\nicholas\Desktop\dump.txt", str);
