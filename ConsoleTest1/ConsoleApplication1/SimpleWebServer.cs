@@ -96,9 +96,9 @@ namespace SimpleWebServer
                                     byte[]  buf = new byte[1024 * 1024];
                                     ctx.Request.InputStream.Read(buf, 0, 1024 * 1024);
                                     ctx.Request.InputStream.Close();
-                                    buf[1024] = 0;
+                                    // buf[1024] = 0;
                                     var str = System.Text.Encoding.Default.GetString(buf);
-                                    Console.WriteLine(str);
+                                    // Console.WriteLine(str);
                                 }
                             }
                             catch { } // suppress any exceptions
