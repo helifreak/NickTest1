@@ -81,11 +81,24 @@ namespace SimpleWebServer
                             var ctx = c as HttpListenerContext;
                             try
                             {
-                                Console.WriteLine("Incoming Request\n");
-                                string rstr = _responderMethod(ctx.Request);
-                                byte[] buf = Encoding.UTF8.GetBytes(rstr);
-                                ctx.Response.ContentLength64 = buf.Length;
-                                ctx.Response.OutputStream.Write(buf, 0, buf.Length);
+                                Console.WriteLine("Incoming Request");
+                                if (ctx.Request.HttpMethod == "GET")
+                                {
+                                    Console.WriteLine(" - GET");
+                                    string rstr = _responderMethod(ctx.Request);
+                                    byte[] buf = Encoding.UTF8.GetBytes(rstr);
+                                    ctx.Response.ContentLength64 = buf.Length;
+                                    ctx.Response.OutputStream.Write(buf, 0, buf.Length);
+                                }
+                                else if (ctx.Request.HttpMethod == "POST")
+                                {
+                                    Console.WriteLine(" - POST");
+                                    byte[]  buf = new byte[1024 * 1024];
+                                    ctx.Request.InputStream.Read(buf, 0, 1024 * 1024);
+                                    ctx.Request.InputStream.Close();
+                                    var str = System.Text.Encoding.Default.GetString(buf);
+                                    Console.WriteLine(str);
+                                }
                             }
                             catch { } // suppress any exceptions
                             finally
