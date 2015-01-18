@@ -14,11 +14,14 @@ namespace ConsoleApplication1
 {
     class Program
     {
+        static ScriptRuntime ipy;
+        static dynamic pytest;
+ 
         static void Main(string[] args)
         {
-            var ipy = Python.CreateRuntime();
-            dynamic test = ipy.UseFile(@"..\..\test.py");
-            test.Simple(3.14);
+            ipy = Python.CreateRuntime();
+            pytest = ipy.UseFile(@"..\..\test.py");
+            // test.Simple(3.14);
 
             string str = System.IO.File.ReadAllText(@"C:\Users\nicholas\Desktop\dump.txt");
             ParseJSON(str);
@@ -83,6 +86,8 @@ namespace ConsoleApplication1
 
         public static void ParseJSON(string str)
         {
+            pytest.Simple(str);
+
             Newtonsoft.Json.Linq.JObject jObject = Newtonsoft.Json.Linq.JObject.Parse(str);
             int maxprint = 5;
             foreach (var item in jObject)
