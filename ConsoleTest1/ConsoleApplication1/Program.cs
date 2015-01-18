@@ -19,14 +19,15 @@ namespace ConsoleApplication1
  
         static void Main(string[] args)
         {
-            ipy = Python.CreateRuntime();
-            pytest = ipy.UseFile(@"..\..\test.py");
+           // ipy = Python.CreateRuntime();
+            //pytest = ipy.UseFile(@"..\..\test.py");
             // test.Simple(3.14);
 
+           /*
             string str = System.IO.File.ReadAllText(@"C:\Users\nicholas\Desktop\dump.txt");
             ParseJSON(str);
             return;
-
+            */
             WebServer ws = new WebServer(SendResponse, "http://*:80/");
             ws.Run();
             Console.WriteLine("A simple webserver. Press a key to quit.");
@@ -86,7 +87,7 @@ namespace ConsoleApplication1
 
         public static void ParseJSON(string str)
         {
-            pytest.Simple(str);
+          //  pytest.Simple(str);
 
             Newtonsoft.Json.Linq.JObject jObject = Newtonsoft.Json.Linq.JObject.Parse(str);
             int maxprint = 5;
