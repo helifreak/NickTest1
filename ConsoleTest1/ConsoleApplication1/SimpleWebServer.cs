@@ -65,7 +65,7 @@ namespace SimpleWebServer
         }
  
         public WebServer(Func<HttpListenerRequest, string> method, params string[] prefixes)
-            : this(prefixes, method) { }     
+            : this(prefixes, method) { }      
  
         public void Run()
         {
