@@ -7,12 +7,19 @@ using System.Net;
 using Newtonsoft.Json;
 using SimpleWebServer;
 
+using IronPython.Hosting;
+using Microsoft.Scripting.Hosting;
+
 namespace ConsoleApplication1
 {
     class Program
     {
         static void Main(string[] args)
         {
+            var ipy = Python.CreateRuntime();
+            dynamic test = ipy.UseFile(@"..\..\test.py");
+            test.Simple(3.14);
+
             string str = System.IO.File.ReadAllText(@"C:\Users\nicholas\Desktop\dump.txt");
             ParseJSON(str);
             return;
