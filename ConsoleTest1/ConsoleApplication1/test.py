@@ -12,7 +12,7 @@ import sys
 
 #from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
 #import os
-#from os import curdir, sep  
+#from os import curdir, sep 
 #import cgi
 import json
 
