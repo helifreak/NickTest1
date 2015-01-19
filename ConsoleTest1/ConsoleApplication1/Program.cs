@@ -23,11 +23,10 @@ namespace ConsoleApplication1
             //pytest = ipy.UseFile(@"..\..\test.py");
             // test.Simple(3.14);
 
-           /*
-            string str = System.IO.File.ReadAllText(@"C:\Users\nicholas\Desktop\dump.txt");
-            ParseJSON(str);
-            return;
-            */
+            // string str = System.IO.File.ReadAllText(@"C:\Users\nicholas\Desktop\dump.txt");
+            // ParseJSON(str);
+            // return;
+
             WebServer ws = new WebServer(SendResponse, "http://*:80/");
             ws.Run();
             Console.WriteLine("A simple webserver. Press a key to quit.");
