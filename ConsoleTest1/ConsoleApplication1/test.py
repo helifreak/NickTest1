@@ -1,4 +1,4 @@
-﻿import sys
+﻿import sys 
 
 def Simple(foo):
 	print("Hello From Python Simple({0})".format(foo))
