@@ -34,6 +34,7 @@ namespace SimpleWebServer
     {
         private readonly HttpListener _listener = new HttpListener();
         private readonly Func<HttpListenerRequest, string> _responderMethod;
+        private bool isrunning = false;
  
         public WebServer(string[] prefixes, Func<HttpListenerRequest, string> method)
         {
@@ -57,10 +58,11 @@ namespace SimpleWebServer
             try
             {
                 _listener.Start();
+                isrunning = true;
             }
             catch (Exception e)
             {
-                Console.WriteLine("{0}\n", e.Message);
+                Console.WriteLine("Error: \"{0}\". Check run as administrtor maybe?\n", e.Message);
             }
         }
  
@@ -87,7 +89,9 @@ namespace SimpleWebServer
                                 ctx.Response.ContentLength64 = buf.Length;
                                 ctx.Response.OutputStream.Write(buf, 0, buf.Length);
                             }
-                            catch { } // suppress any exceptions 
+                            catch {
+                                Console.WriteLine("There was a problem processing request");
+                            } // suppress any exceptions 
                             finally
                             {
                                 // always close the stream
@@ -102,8 +106,9 @@ namespace SimpleWebServer
  
         public void Stop()
         {
-            _listener.Stop();
+            if (isrunning) _listener.Stop();
             _listener.Close();
+            isrunning = false;
         }
     }
 }
