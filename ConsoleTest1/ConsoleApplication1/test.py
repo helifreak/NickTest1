@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿#!/usr/bin/python
+﻿﻿#!/usr/bin/python
 import sys
 
 #def Simple(foo):
@@ -18,9 +17,8 @@ import sys
 import json
 
 #PORT_NUMBER = 8080  
-=======
-﻿import sys 
->>>>>>> 6e00a83949416ac811b33156ab141cb241e9f552
+import sys 
+#6e00a83949416ac811b33156ab141cb241e9f552
 
 def Simple(foo):
     json_data = foo 
